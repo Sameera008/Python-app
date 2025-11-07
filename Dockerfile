@@ -1,11 +1,17 @@
-FROM python:3.6
+# Base Image
+FROM python:3.9-slim
 
-RUN pip install flask
+# Working Directory
+WORKDIR /app
 
-COPY . /opt/
+# Copy Files
+COPY . /app
 
-EXPOSE 8080
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /opt
+# Expose port
+EXPOSE 5000
 
-ENTRYPOINT ["python", "app.py"]
+# Run the app
+CMD ["python", "app.py"]
